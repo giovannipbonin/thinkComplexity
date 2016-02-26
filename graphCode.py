@@ -23,7 +23,8 @@ class Graph(dict):
         v, w = e
         self[v][w] = e
         self[w][v] = e
-
+    def get_edge(self, v1, v2):
+        return self.get(v1).get(v2) 
 
 class Vertex(object):
     def __init__(self, label=''):
