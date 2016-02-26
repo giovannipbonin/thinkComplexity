@@ -40,6 +40,15 @@ class Graph(dict):
         return self[v].keys() 
     def out_edges(self, v):
         return self[v].values()
+    def add_all_edges(self):
+        vertices = g.vertices()
+        verticesNumber = len(vertices)
+        for i in range(verticesNumber):
+            for j in range(i + 1, verticesNumber):
+                e = Edge(vertices[i], vertices[j])
+                g.add_edge(e)
+
+
 class Vertex(object):
     def __init__(self, label=''):
         self.label = label
