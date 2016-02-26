@@ -25,21 +25,27 @@ class Graph(dict):
         self[w][v] = e
     def get_edge(self, v1, v2):
         return self.get(v1).get(v2) 
+
     def remove_edge(self, e):
         v1, v2 = e
         del self[v1][v2]
         del self[v2][v1]
+        
     def vertices(self):
         return self.keys()
+
     def edges(self):
         edgeSet = set()
         for v in self.keys():
             edgeSet.update(self[v].values())
         return edgeSet
+
     def out_vertices(self, v):
         return self[v].keys() 
+
     def out_edges(self, v):
         return self[v].values()
+
     def add_all_edges(self):
         vertices = self.vertices()
         verticesNumber = len(vertices)
@@ -47,7 +53,22 @@ class Graph(dict):
             for j in range(i + 1, verticesNumber):
                 e = Edge(vertices[i], vertices[j])
                 self.add_edge(e)
+    def add_regular_edges(self, n):
+        vertices = self.vertices()
+        verticesNumber = len(vertices)
+        if (n > verticesNumber - 1): return
+        if (n % 2 == 1 and verticesNumber % 2 == 1): return
+        for i in range(verticesNumber):
+            for j in range(n/2):
+                e1 = Edge(vertices[i], vertices[(i + j + 1)%verticesNumber])
+                e2 = Edge(vertices[i], vertices[i - j - 1])
+                self.add_edge(e1)
+                self.add_edge(e2)
+            if (n % 2 == 1): 
+                e1 = Edge(vertices[i], vertices[(i + verticesNumber/2)%verticesNumber])
+                self.add_edge(e1)
 
+                
 
 class Vertex(object):
     def __init__(self, label=''):
