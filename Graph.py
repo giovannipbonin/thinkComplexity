@@ -1,5 +1,6 @@
 ## This file contains the implementation of a Graph
 
+import Queue
 
 class Graph(dict):
     def __init__(self, vs=[], es=[]):
@@ -67,6 +68,21 @@ class Graph(dict):
             if (n % 2 == 1): 
                 e1 = Edge(vertices[i], vertices[(i + verticesNumber/2)%verticesNumber])
                 self.add_edge(e1)
+    def is_connected(self):
+       vertices = self.vertices()
+       verticesLen = len(vertices)
+       if (verticesLen == 0): return True
+       q = Queue.Queue()
+       s = set()
+       q.put(vertices[0])
+       while (not q.empty()):
+            v = q.get()
+            s.add(v)
+            for v2 in self[v]:
+                if v2 not in s:
+                    q.put(v2)
+       return len(s) == len(vertices)
+
 
                 
 
