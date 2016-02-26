@@ -25,6 +25,10 @@ class Graph(dict):
         self[w][v] = e
     def get_edge(self, v1, v2):
         return self.get(v1).get(v2) 
+    def remove_edge(self, e):
+        v1, v2 = e
+        del self[v1][v2]
+        del self[v2][v1]
 
 class Vertex(object):
     def __init__(self, label=''):
