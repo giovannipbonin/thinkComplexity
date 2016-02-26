@@ -36,6 +36,8 @@ class Graph(dict):
         for v in self.keys():
             edgeSet.update(self[v].values())
         return edgeSet
+    def out_vertices(self, v):
+        return self[v].keys() 
 
 class Vertex(object):
     def __init__(self, label=''):
