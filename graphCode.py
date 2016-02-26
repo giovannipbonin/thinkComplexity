@@ -29,6 +29,13 @@ class Graph(dict):
         v1, v2 = e
         del self[v1][v2]
         del self[v2][v1]
+    def vertices(self):
+        return self.keys()
+    def edges(self):
+        edgeSet = set()
+        for v in self.keys():
+            edgeSet.update(self[v].values())
+        return edgeSet
 
 class Vertex(object):
     def __init__(self, label=''):
