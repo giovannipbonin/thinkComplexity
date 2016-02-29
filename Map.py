@@ -29,7 +29,10 @@ class LinearMap(object):
             if key == k:
                 return val
         raise KeyError
-
+    def iteritems(self):
+        for k,v in self.items:
+           yield k, v 
+            
 
 class BetterMap(object):
     """A faster implementation of a map using a list of LinearMaps
@@ -41,6 +44,9 @@ class BetterMap(object):
         self.maps = []
         for i in range(n):
             self.maps.append(LinearMap())
+
+    def __len__(self):
+        return len(self.maps)
 
     def find_map(self, k):
         """Finds the right LinearMap for key (k)."""
@@ -78,7 +84,7 @@ class HashMap(object):
 
     def add(self, k, v):
         """Resize the map if necessary and adds the new item."""
-        if self.num == len(self.maps.maps):
+        if self.num == len(self.maps):
             self.resize()
 
         self.maps.add(k, v)
@@ -87,9 +93,9 @@ class HashMap(object):
     def resize(self):
         """Makes a new map, twice as big, and rehashes the items."""
         new_maps = BetterMap(self.num * 2)
-
+        
         for m in self.maps.maps:
-            for k, v in m.items:
+            for k, v in m.iteritems():
                 new_maps.add(k, v)
 
         self.maps = new_maps
