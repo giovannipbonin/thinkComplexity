@@ -27,7 +27,7 @@ class GraphCanvas(GuiCanvas):
     """a GraphCanvas is a canvas that knows how to draw Vertices
     and Edges"""
 
-    def draw_vertex(self, v, r=0.45):
+    def draw_vertex(self, v, r=0.25):
         """draw a Vertex as a yellow circle with radius (r)
         and text (v.label)"""
         tag = 'v%d' % id(self)
@@ -59,9 +59,9 @@ class GraphWorld(Gui):
 
     def setup(self):
         """Create the widgets."""
-        self.ca_width = 400
-        self.ca_height = 400
-        xscale = self.ca_width / 20
+        self.ca_width = 1600
+        self.ca_height = 1000
+        xscale = self.ca_width / 30
         yscale = self.ca_height / 20
 
         # canvas
