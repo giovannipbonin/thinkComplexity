@@ -30,7 +30,7 @@ def main(script, n='1000', *args):
 #j    g.add_regular_edges(3)
 
     # draw the graph
-    #gw = GraphWorld()
+    gw = GraphWorld()
     coefficients = []
     x = [i/float(100) for i in range(100)]
     g0 = SmallWorldGraph.SmallWorldGraph(vs, 10, 0)
@@ -39,19 +39,19 @@ def main(script, n='1000', *args):
         g = SmallWorldGraph.SmallWorldGraph(vs, 10, p)
         gCoeff = g.clustering_coefficient()
         coefficients.append(gCoeff/g0Coeff)
-        #layout = CircleLayout(g)
-        #gw.show_graph(g, layout)
-        #gw.update_idletasks()
-        #gw.update()
-        #time.sleep(0.01)
-    #gw.mainloop()
+        layout = CircleLayout(g)
+        gw.show_graph(g, layout)
+        gw.update_idletasks()
+        gw.update()
+        time.sleep(0.01)
+    gw.mainloop()
     #gbase = SmallWorldGraph.SmallWorldGraph(v1, 
     pyplot.xlabel("Probability")
     pyplot.ylabel("Clustering Coefficient")
     pyplot.title("Clustering Coefficient for Small World Theory")
     pyplot.plot(x, coefficients)
     pyplot.xscale('log')
-    pyplot.show()
+    #pyplot.show()
 
 if __name__ == '__main__':
     import sys
