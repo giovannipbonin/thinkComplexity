@@ -1,4 +1,4 @@
-class DictFifo(object):
+class Queue(object):
     def __init__(self):
         self.nextin = 0
         self.nextout = 0
@@ -12,3 +12,8 @@ class DictFifo(object):
         value = self.data.pop(self.nextout)
         self.nextout += 1
         return value
+
+
+class PriorityQueue(Queue):
+    def __init__(self):
+        Queue.__init__(self)

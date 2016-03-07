@@ -8,7 +8,6 @@ class Graph(dict):
         (es) is a list of edges."""
         for v in vs:
             self.add_vertex(v)
-
         for e in es:
             self.add_edge(e)
 
@@ -24,6 +23,7 @@ class Graph(dict):
         v, w = e
         self[v][w] = e
         self[w][v] = e
+
     def get_edge(self, v1, v2):
         return self.get(v1).get(v2) 
 
@@ -42,10 +42,10 @@ class Graph(dict):
         return edgeSet
 
     def out_vertices(self, v):
-        return self[v].keys() 
+            return self[v].keys() 
 
     def out_edges(self, v):
-        return self[v].values()
+            return self[v].values()
 
     def add_all_edges(self):
         vertices = self.vertices()

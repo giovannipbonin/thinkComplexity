@@ -30,28 +30,34 @@ def main(script, n='1000', *args):
 #j    g.add_regular_edges(3)
 
     # draw the graph
-    gw = GraphWorld()
+    #gw = GraphWorld()
     coefficients = []
-    x = [i/float(100) for i in range(100)]
+    x = [0.0001, 0.001, 0.01, 0.1]
+    y = [1.25, 2.5, 3.75, 5, 6.25, 7.5, 8.75, 10]
+    scale = [i*j for i in x for j in y]
+    avgLens = []
     g0 = SmallWorldGraph.SmallWorldGraph(vs, 10, 0)
     g0Coeff = g0.clustering_coefficient()
-    for p in x:
+    g0AvgLen = g0.avg_path_length()
+    for p in scale:
         g = SmallWorldGraph.SmallWorldGraph(vs, 10, p)
         gCoeff = g.clustering_coefficient()
         coefficients.append(gCoeff/g0Coeff)
-        layout = CircleLayout(g)
-        gw.show_graph(g, layout)
-        gw.update_idletasks()
-        gw.update()
-        time.sleep(0.01)
-    gw.mainloop()
-    #gbase = SmallWorldGraph.SmallWorldGraph(v1, 
+        gAvgLen = g.avg_path_length()
+        avgLens.append(gAvgLen/g0AvgLen)
+    #layout = CircleLayout(g)
+    #gw.show_graph(g, layout)
+    #gw.update_idletasks()
+    #gw.update()
+    #time.sleep(0.01)
+    #gw.mainloop()
     pyplot.xlabel("Probability")
-    pyplot.ylabel("Clustering Coefficient")
+    pyplot.ylabel("Clustering Coefficient & Avg Path Length Curves")
     pyplot.title("Clustering Coefficient for Small World Theory")
-    pyplot.plot(x, coefficients)
+    pyplot.plot(scale, coefficients)
+    pyplot.plot(scale, avgLens)
     pyplot.xscale('log')
-    #pyplot.show()
+    pyplot.show()
 
 if __name__ == '__main__':
     import sys
