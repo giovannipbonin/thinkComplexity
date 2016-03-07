@@ -1,6 +1,7 @@
 import RandomGraph
 import Graph
 import random
+import search
 
 
 class SmallWorldGraph(RandomGraph.RandomGraph):
@@ -36,3 +37,12 @@ class SmallWorldGraph(RandomGraph.RandomGraph):
                         totalEdges += 1
             coefficientSum += totalEdges/possibleEdges
         return coefficientSum/len(self.vertices())
+    def avg_path_length(self):
+        vertices = self.vertices()
+        verticesLen = len(vertices)
+        totalPathLen = 0
+        for v in vertices:
+            distances = search.dijkstraSearch(self, v)
+            totalPathLen += sum(distances.values())
+        verticePairs = (verticesLen - 1)*verticesLen
+        return totalPathLen/float(verticePairs)
