@@ -8,7 +8,8 @@ class SmallWorldGraph(RandomGraph.RandomGraph):
     def __init__(self, vs, k, p):
         RandomGraph.RandomGraph.__init__(self, vs)
         self.add_regular_edges(k)
-        self.rewire(p)
+        #self.rewire(p)
+        self.customRewire(p)
     def rewire(self, p):
         edges = list(self.edges())
         vertices = self.vertices()
@@ -20,6 +21,17 @@ class SmallWorldGraph(RandomGraph.RandomGraph):
                 w = random.choice(vertices)
                 while (v == w or self.get_edge(v, w) != None):
                     w = random.choice(vertices)
+                self.add_edge(Graph.Edge(v, w))
+    def customRewire(self, p):
+        edges = list(self.edges())
+        vertices = self.vertices()
+        for e in edges:
+           if random.random() < p:
+                self.remove_edge(e)
+                w = random.choice(vertices)
+                v = random.choice(vertices)
+                while (v == w or self.get_edge(v, w) != None):
+                    v = random.choice(vertices)
                 self.add_edge(Graph.Edge(v, w))
     def clustering_coefficient(self):
         coefficientSum = 0;
