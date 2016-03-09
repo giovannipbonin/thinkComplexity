@@ -8,8 +8,8 @@ class SmallWorldGraph(RandomGraph.RandomGraph):
     def __init__(self, vs, k, p):
         RandomGraph.RandomGraph.__init__(self, vs)
         self.add_regular_edges(k)
-        #self.rewire(p)
-        self.customRewire(p)
+        self.rewire(p)
+        #self.customRewire(p)
     def rewire(self, p):
         edges = list(self.edges())
         vertices = self.vertices()
