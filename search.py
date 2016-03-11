@@ -19,14 +19,15 @@ def dijkstraSearch(graph, start):
     return distances
 
 def floydMarshall(graph):
+    verticesList = graph.vertices()
+    verticesLen = len(verticesList)
     dist = [[float('inf') for i in range(verticesLen)] for i in range(verticesLen)] 
     vertices = {}
-    verticesLen = 0
-    verticesList = graph.vertices()
+    count = 0
     for v in verticesList:
        vertices[v] = count
        dist[count][count] = 0
-       verticesLen += 1
+       count += 1
     edges = graph.edges()
     for e in edges:
         v1, v2 = e

@@ -55,6 +55,10 @@ class SmallWorldGraph(RandomGraph.RandomGraph):
         totalPathLen = 0
         for v in vertices:
             distances = search.dijkstraSearch(self, v)
+            #distances = search.floydMarshall(self)
+           # for i in range(verticesLen):
+           #     for j in range(i + 1, verticesLen):
+           #         totalPathLen += distances[i][j]
             totalPathLen += sum(distances.values())
         verticePairs = (verticesLen - 1)*verticesLen
         return totalPathLen/float(verticePairs)
