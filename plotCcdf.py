@@ -3,15 +3,22 @@ import random
 import Cdf
 
 
-def plot_ccdf(values, prob):
-    pylab.yscale('log')
+def plot_ccdf(values, prob, xscale, yscale):
+    pylab.yscale(yscale)
+    pylab.xscale(xscale)
     compProb = [1 - e for e in prob] 
     pylab.plot(values, compProb)
-    pylab.show()
     
 
-values = [random.expovariate(100) for i in range(10000)]
-cdf = Cdf.MakeCdfFromList(values)
-y, p = cdf.Render()
+values = [random.expovariate(10) for i in range(1000)]
+cdfExpo = Cdf.MakeCdfFromList(values)
+y1, p1 = cdfExpo.Render()
+values = [random.paretovariate(1) for i in range(1000)]
+cdfPareto = Cdf.MakeCdfFromList(values)
+y2, p2 = cdfPareto.Render()
 
-plot_ccdf(y, p)
+pylab.subplot(2, 1, 1)
+plot_ccdf(y1, p1, 'linear', 'log')
+pylab.subplot(2, 1, 2)
+plot_ccdf(y2, p2, 'log', 'log')
+pylab.show()
