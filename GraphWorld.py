@@ -159,6 +159,9 @@ class RandomLayout(Layout):
         y = random.uniform(-self.max, self.max)
         return x, y
 
+    def add_vertex(self, v):
+        self[v] = self.random_pos()
+
     def spread_vertex(self, v, others, min_dist=1.0):
         """Keep choosing random positions for v until it is at least
         min_dist units from the vertices in others.
