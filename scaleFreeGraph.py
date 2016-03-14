@@ -16,15 +16,15 @@ class ScaleFreeGraph(Graph.Graph):
     def add_node(self):
         vertices = self.vertices()
         newNode = Graph.Vertex(self.gen.next())
+        self.add_vertex(newNode)
         for v in vertices:
             v_edgesNumber = len(self.out_vertices(v))
             p = v_edgesNumber/float(self.edgeCount)
             if (random.random() < p):
                 newEdge = Graph.Edge(v, newNode)
-                self.add_vertex(newNode)
                 self.add_edge(newEdge)
                 self.edgeCount += 2
-
+        return newNode
 
 
 
