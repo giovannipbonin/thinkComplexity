@@ -141,7 +141,11 @@ class CircleLayout(Layout):
             x = radius * math.cos(i * theta)
             y = radius * math.sin(i * theta)
             self[v] = (x, y)
-
+    def add_vertex(self, v):
+        x = random.uniform(-10, 10)
+        y = random.uniform(-10, 10)
+        self[v] = (x, y)
+       
 
 class RandomLayout(Layout):
     """Create a layout with each Vertex at a random position in
