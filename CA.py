@@ -74,6 +74,36 @@ class CA(object):
         else:
             return self.array[:, start:end]
 
+class CircularCA(CA):
+    def __init__(self, rule, n=100, ratio=2):
+        self.table = self.make_table(rule)
+        self.n = n
+        self.m = ratio*n + 1 + 2
+        self.array = numpy.zeros((n, self.m), dtype=numpy.int8)
+        self.next = 0
+    
+    def start_single(self):
+        self.array[0, 1] = 1
+        self.next += 1
+
+    def step(self):
+        """Executes one time step by computing the next row of the array."""
+        i = self.next
+        self.next += 1
+
+        a = self.array
+        t = self.table
+        a[i-1,0] = a[i-1, self.m-2]
+        a[i-1, self.m-1] = a[i-1, 1]
+        for j in xrange(1,self.m-1):
+            a[i,j] = t[tuple(a[i-1, j-1:j+2])]
+    def get_array(self, start=0, end=None):
+        if end ==None:
+            return self.array[:, start+1:self.m-1]
+        else:
+            return self.array[:, start+1:end+1]
+
+
 
 def binary(n, digits):
     """Returns a tuple of (digits) integers representing the
